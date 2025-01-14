@@ -2,12 +2,14 @@
   "name": "api",
   "version": "0.0.0",
   "private": true,
+  "main": "src/index.ts",
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "test": "vitest",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "build": "wrangler build"
   },
   "dependencies": {
     "wrangler": "^3.101.0"
@@ -17,5 +19,8 @@
     "@cloudflare/workers-types": "^4.20250109.0",
     "typescript": "^5.5.2",
     "vitest": "2.1.8"
+  },
+  "engines": {
+    "node": ">=16.13.0"
   }
 }
