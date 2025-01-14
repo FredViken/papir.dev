@@ -2,14 +2,12 @@
   "name": "api",
   "version": "0.0.0",
   "private": true,
-  "main": "src/index.ts",
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "test": "vitest",
-    "cf-typegen": "wrangler types",
-    "build": "wrangler build"
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "wrangler": "^3.101.0"
