@@ -2,7 +2,7 @@
 name = "api"
 main = "src/index.ts"
 compatibility_date = "2025-01-09"
-
+compatibility_flags = [ "nodejs_compat" ]
 # Workers Logs
 # Docs: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
 # Configuration: https://developers.cloudflare.com/workers/observability/logs/workers-logs/#enable-workers-logs
@@ -37,7 +37,7 @@ enabled = true
 # Bind a headless browser instance running on Cloudflare's global network.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#browser-rendering
 # [browser]
-# binding = "MY_BROWSER"
+# binding = "BROWSER"
 
 # Bind a D1 database. D1 is Cloudflare’s native serverless SQL database.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#d1-databases
