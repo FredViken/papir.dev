@@ -6,12 +6,17 @@
       "dependsOn": ["^build"],
       "outputs": [".svelte-kit/**", ".output/**", "dist/**", "build/**"]
     },
+    "deploy": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
     "lint": {
       "outputs": []
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": ["^build"]
     },
     "test": {
       "dependsOn": ["build"],

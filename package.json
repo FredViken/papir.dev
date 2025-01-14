@@ -2,11 +2,6 @@
   "name": "papir.dev",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "apps/workers/*",
-    "packages/*"
-  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
