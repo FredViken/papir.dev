@@ -11,7 +11,7 @@
 	<div class="container flex h-16 items-center justify-between">
 		<div class="flex items-center gap-2">
 			<div
-				class="flex size-8 items-center justify-center rounded-sm bg-primary font-bold text-white"
+				class="flex size-8 items-center justify-center rounded-sm bg-rose-500 font-bold text-white shadow-inner shadow-white/20"
 			>
 				P
 			</div>
