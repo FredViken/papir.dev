@@ -228,7 +228,7 @@
 <div class="relative pt-16 bg-grid-neutral-100">
 	<section class="container  grid overflow-hidden md:grid-cols-[2fr_3fr] lg:gap-12">
 		<div
-			class="my-auto flex flex-col items-center justify-center space-y-4 pt-32 text-center md:items-start md:py-20 md:text-left"
+			class="my-auto flex flex-col items-center justify-center space-y-4 pt-20 md:pt-32 text-center md:items-start md:py-20 md:text-left"
 		>
 			<h1 class="text-4xl font-bold">Simplify your <span class="text-rose-500">PDFs</span></h1>
 			<p class="text-pretty text-lg text-muted-foreground">
