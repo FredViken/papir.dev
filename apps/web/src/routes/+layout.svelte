@@ -17,7 +17,7 @@
 			</div>
 			<span class="text-xl font-bold">Papir.dev</span>
 		</div>
-		<div class="flex items-center gap-6 text-muted-foreground">
+		<div class="items-center gap-6 text-muted-foreground hidden sm:flex">
 
 			<a href="/">Home</a>
 			<a href="/pricing">Pricing</a>

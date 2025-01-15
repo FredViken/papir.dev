@@ -50,159 +50,183 @@
 			const nextInvoice = invoices[(index + 1) % invoices.length];
 
 			// Name field animation
-			tl.to({}, {
-				duration: 0.2,
-				onStart: () => {
-					gsap.to(terminalRef.querySelector('p:first-child'), {
-						backgroundColor: 'rgba(255,255,255,0.15)',
-						duration: 0.2
-					});
+			tl.to(
+				{},
+				{
+					duration: 0.2,
+					onStart: () => {
+						gsap.to(terminalRef.querySelector('p:first-child'), {
+							backgroundColor: 'rgba(255,255,255,0.15)',
+							duration: 0.2
+						});
+					}
 				}
-			})
-			.to(terminalRef.querySelector('p:first-child'), {
-				duration: 0.4,
-				text: '"name": ""',
-				ease: 'none'
-			})
-			.to(terminalRef.querySelector('p:first-child'), {
-				duration: 1.2,
-				text: `"name": "${nextInvoice.name}",`,
-				ease: 'none',
-				onComplete: () => {
-					gsap.to(invoiceRef.querySelector('.invoice-name'), {
-						x: -20,
-						opacity: 0,
-						duration: 0.2,
-						onComplete: () => {
-							invoiceName = nextInvoice.name;
-							invoiceDate = nextInvoice.date;
-							dueDate = nextInvoice.dueDate;
-							gsap.fromTo(invoiceRef.querySelector('.invoice-name'), 
-								{ x: 20, opacity: 0 },
-								{ x: 0, opacity: 1, duration: 0.4, ease: 'back.out(1.7)' }
-							);
-						}
-					});
-				}
-			})
-			.to({}, {
-				duration: 0.3,
-				onStart: () => {
-					gsap.to(terminalRef.querySelector('p:first-child'), {
-						backgroundColor: 'transparent',
-						duration: 0.2
-					});
-				}
-			})
-
-			// Amount field animation
-			.to({}, {
-				duration: 0.2,
-				onStart: () => {
-					gsap.to(terminalRef.querySelector('p:nth-child(2)'), {
-						backgroundColor: 'rgba(255,255,255,0.15)',
-						duration: 0.2
-					});
-				}
-			})
-			.to(terminalRef.querySelector('p:nth-child(2)'), {
-				duration: 0.4,
-				text: '"amount": ""',
-				ease: 'none'
-			})
-			.to(terminalRef.querySelector('p:nth-child(2)'), {
-				duration: 1.2,
-				text: `"amount": "${nextInvoice.amount}",`,
-				ease: 'none'
-			})
-			.to({}, {
-				duration: 0.2,
-				onComplete: () => {
-					gsap.to([
-						invoiceRef.querySelector('.subtotal-row'),
-						invoiceRef.querySelector('.total-row')
-					], {
-						opacity: 0,
-						y: -10,
-						duration: 0.2,
-						stagger: 0,
-						onComplete: () => {
-							invoiceAmount = nextInvoice.amount;
-							gsap.fromTo([
-								invoiceRef.querySelector('.subtotal-row'),
-								invoiceRef.querySelector('.total-row')
-							], 
-							{
-								opacity: 0,
-								y: -20
-							},
-							{
-								opacity: 1,
-								y: 0,
-								duration: 0.4,
-								stagger: 0.2,
-								ease: 'power2.out'
+			)
+				.to(terminalRef.querySelector('p:first-child'), {
+					duration: 0.4,
+					text: '"name": ""',
+					ease: 'none'
+				})
+				.to(terminalRef.querySelector('p:first-child'), {
+					duration: 1.2,
+					text: `"name": "${nextInvoice.name}",`,
+					ease: 'none',
+					onComplete: () => {
+						gsap.to(invoiceRef.querySelector('.invoice-name'), {
+							x: -20,
+							opacity: 0,
+							duration: 0.2,
+							onComplete: () => {
+								invoiceName = nextInvoice.name;
+								invoiceDate = nextInvoice.date;
+								dueDate = nextInvoice.dueDate;
+								gsap.fromTo(
+									invoiceRef.querySelector('.invoice-name'),
+									{ x: 20, opacity: 0 },
+									{ x: 0, opacity: 1, duration: 0.4, ease: 'back.out(1.7)' }
+								);
+							}
+						});
+					}
+				})
+				.to(
+					{},
+					{
+						duration: 0.3,
+						onStart: () => {
+							gsap.to(terminalRef.querySelector('p:first-child'), {
+								backgroundColor: 'transparent',
+								duration: 0.2
 							});
 						}
-					});
-				}
-			})
-			.to({}, {
-				duration: 0.3,
-				onStart: () => {
-					gsap.to(terminalRef.querySelector('p:nth-child(2)'), {
-						backgroundColor: 'transparent',
-						duration: 0.2
-					});
-				}
-			})
+					}
+				)
 
-			// Status field animation
-			.to({}, {
-				duration: 0.2,
-				onStart: () => {
-					gsap.to(terminalRef.querySelector('p:nth-child(3)'), {
-						backgroundColor: 'rgba(255,255,255,0.15)',
-						duration: 0.2
-					});
-				}
-			})
-			.to(terminalRef.querySelector('p:nth-child(3)'), {
-				duration: 0.4,
-				text: '"status": ""',
-				ease: 'none'
-			})
-			.to(terminalRef.querySelector('p:nth-child(3)'), {
-				duration: 1.2,
-				text: `"status": "${nextInvoice.status}"`,
-				ease: 'none',
-				onComplete: () => {
-					gsap.to(invoiceRef.querySelector('.status-badge'), {
-						keyframes: [
-							{ scale: 1.2, duration: 0.2 },
-							{ scale: 1, duration: 0.2 }
-						]
-					});
-					invoiceStatus = nextInvoice.status;
-					invoiceDate = nextInvoice.date;
-					dueDate = nextInvoice.dueDate;
-				}
-			})
-			.to({}, {
-				duration: 0.3,
-				onStart: () => {
-					gsap.to(terminalRef.querySelector('p:nth-child(3)'), {
-						backgroundColor: 'transparent',
-						duration: 0.2
-					});
-				}
-			});
+				// Amount field animation
+				.to(
+					{},
+					{
+						duration: 0.2,
+						onStart: () => {
+							gsap.to(terminalRef.querySelector('p:nth-child(2)'), {
+								backgroundColor: 'rgba(255,255,255,0.15)',
+								duration: 0.2
+							});
+						}
+					}
+				)
+				.to(terminalRef.querySelector('p:nth-child(2)'), {
+					duration: 0.4,
+					text: '"amount": ""',
+					ease: 'none'
+				})
+				.to(terminalRef.querySelector('p:nth-child(2)'), {
+					duration: 1.2,
+					text: `"amount": "${nextInvoice.amount}",`,
+					ease: 'none'
+				})
+				.to(
+					{},
+					{
+						duration: 0.2,
+						onComplete: () => {
+							gsap.to(
+								[invoiceRef.querySelector('.subtotal-row'), invoiceRef.querySelector('.total-row')],
+								{
+									opacity: 0,
+									y: -10,
+									duration: 0.2,
+									stagger: 0,
+									onComplete: () => {
+										invoiceAmount = nextInvoice.amount;
+										gsap.fromTo(
+											[
+												invoiceRef.querySelector('.subtotal-row'),
+												invoiceRef.querySelector('.total-row')
+											],
+											{
+												opacity: 0,
+												y: -20
+											},
+											{
+												opacity: 1,
+												y: 0,
+												duration: 0.4,
+												stagger: 0.2,
+												ease: 'power2.out'
+											}
+										);
+									}
+								}
+							);
+						}
+					}
+				)
+				.to(
+					{},
+					{
+						duration: 0.3,
+						onStart: () => {
+							gsap.to(terminalRef.querySelector('p:nth-child(2)'), {
+								backgroundColor: 'transparent',
+								duration: 0.2
+							});
+						}
+					}
+				)
+
+				// Status field animation
+				.to(
+					{},
+					{
+						duration: 0.2,
+						onStart: () => {
+							gsap.to(terminalRef.querySelector('p:nth-child(3)'), {
+								backgroundColor: 'rgba(255,255,255,0.15)',
+								duration: 0.2
+							});
+						}
+					}
+				)
+				.to(terminalRef.querySelector('p:nth-child(3)'), {
+					duration: 0.4,
+					text: '"status": ""',
+					ease: 'none'
+				})
+				.to(terminalRef.querySelector('p:nth-child(3)'), {
+					duration: 1.2,
+					text: `"status": "${nextInvoice.status}"`,
+					ease: 'none',
+					onComplete: () => {
+						gsap.to(invoiceRef.querySelector('.status-badge'), {
+							keyframes: [
+								{ scale: 1.2, duration: 0.2 },
+								{ scale: 1, duration: 0.2 }
+							]
+						});
+						invoiceStatus = nextInvoice.status;
+						invoiceDate = nextInvoice.date;
+						dueDate = nextInvoice.dueDate;
+					}
+				})
+				.to(
+					{},
+					{
+						duration: 0.3,
+						onStart: () => {
+							gsap.to(terminalRef.querySelector('p:nth-child(3)'), {
+								backgroundColor: 'transparent',
+								duration: 0.2
+							});
+						}
+					}
+				);
 		});
 	});
 </script>
 
-<div class="bg-grid-neutral-100 relative pt-16">
-	<section class="container grid overflow-hidden md:grid-cols-[2fr_3fr] lg:gap-12">
+<div class="relative pt-16 bg-grid-neutral-100">
+	<section class="container  grid overflow-hidden md:grid-cols-[2fr_3fr] lg:gap-12">
 		<div
 			class="my-auto flex flex-col items-center justify-center space-y-4 pt-32 text-center md:items-start md:py-20 md:text-left"
 		>
@@ -211,12 +235,12 @@
 				Create beautiful dynamic and fully customizable PDFs with our powerful editor and API.
 			</p>
 			<div class="flex gap-4">
-				<Button class="w-fit">Get started for free</Button>
+				<Button href="/signup" class="w-fit">Get started for free</Button>
 				<Button variant="outline" class="w-fit">Pricing</Button>
 			</div>
 		</div>
 		<div
-			class="overflow-x-show relative flex h-[500px] w-full items-start justify-center overflow-y-hidden px-12 pt-16 lg:px-20"
+			class="overflow-x-show relative flex h-[500px] -left-8 md:left-0 md:w-full w-[calc(100%+4rem)] items-start justify-center overflow-y-hidden ~px-4/20 pt-16"
 		>
 			<div class="relative aspect-[1/1.4142] w-full">
 				<div class="absolute inset-0 -rotate-6 transform-gpu">
@@ -258,7 +282,7 @@
 							</div>
 						</div>
 
-						<div class="mb-6 invoice-details">
+						<div class="invoice-details mb-6">
 							<h2 class="invoice-name text-xl font-semibold text-rose-500">{invoiceName}</h2>
 							<div class="mt-1">
 								<p class="text-xs text-muted-foreground">Issue Date: {invoiceDate}</p>
@@ -289,7 +313,7 @@
 				</div>
 			</div>
 			<div
-				class="absolute bottom-20 right-4 z-20 w-80 transform-gpu rounded-lg border-2 border-neutral-700 bg-neutral-900/75 p-4 font-mono text-sm text-neutral-200 shadow-lg backdrop-blur-sm"
+				class="absolute bottom-4 md:bottom-20 left-1/2 -translate-x-1/2 md:translate-x-0 md:right-4 z-20 w-80 transform-gpu rounded-lg border-2 border-neutral-700 bg-neutral-900/75 p-4 font-mono text-sm text-neutral-200 shadow-lg backdrop-blur-sm"
 				bind:this={terminalRef}
 			>
 				<div class="mb-3 flex items-center gap-1.5">
@@ -297,7 +321,7 @@
 					<div class="size-2 rounded-full bg-yellow-500"></div>
 					<div class="size-2 rounded-full bg-green-500"></div>
 				</div>
-				<div class="relative space-y-1 text-xs">
+				<code class="relative space-y-1 text-xs prose" lang="json">
 					<span>&#123;</span>
 					<div class="ml-4 space-y-1">
 						<p class="rounded-sm p-1">"name": "{invoiceName}",</p>
@@ -305,12 +329,12 @@
 						<p class="rounded-sm p-1">"status": "{invoiceStatus}"</p>
 					</div>
 					<span>&#125;</span>
-				</div>
+				</code>
 			</div>
 		</div>
 	</section>
 	<div
-		class="absolute inset-x-0 bottom-0 h-[200px] bg-gradient-to-b from-transparent to-background"
+		class="pointer-events-none absolute inset-x-0 bottom-0 h-[200px] bg-gradient-to-b from-transparent to-background"
 	></div>
 </div>
 
