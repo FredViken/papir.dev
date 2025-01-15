@@ -2,13 +2,16 @@ import { fontFamily } from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
 import tailwindcssAnimate from 'tailwindcss-animate';
 import svgToDataUri from 'mini-svg-data-uri';
+import fluid, { extract, screens, fontSize } from 'fluid-tailwind';
 import { default as flattenColorPalette } from 'tailwindcss/lib/util/flattenColorPalette';
 
 const config: Config = {
 	darkMode: ['class'],
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	content: { files: ['./src/**/*.{html,js,svelte,ts}'], extract },
 	safelist: ['dark'],
 	theme: {
+		screens, // Tailwind's default screens, in `rem`
+		fontSize, // Tailwind's default font sizes, in `rem` (including line heights)
 		container: {
 			center: true,
 			padding: '2rem',
@@ -94,19 +97,20 @@ const config: Config = {
 	},
 	plugins: [
 		tailwindcssAnimate,
+		fluid,
 		function ({ matchUtilities, theme }) {
 			matchUtilities(
 				{
-					"bg-grid": (value) => ({
-            backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
-            )}")`,
-          }),
-          "bg-grid-small": (value) => ({
-            backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
-            )}")`,
-          }),
+					'bg-grid': (value) => ({
+						backgroundImage: `url("${svgToDataUri(
+							`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+						)}")`
+					}),
+					'bg-grid-small': (value) => ({
+						backgroundImage: `url("${svgToDataUri(
+							`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+						)}")`
+					}),
 					'bg-grid-large': (value) => ({
 						backgroundImage: `url("${svgToDataUri(
 							`<svg xmlns="http://www.w3.org/2000/svg" stroke-dasharray="4" stroke-dashoffset="4" viewBox="0 0 32 32" width="64" height="64" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
@@ -120,8 +124,7 @@ const config: Config = {
 				},
 				{ values: flattenColorPalette(theme('backgroundColor')), type: 'color' }
 			);
-		},
-		
+		}
 	]
 };
 
