@@ -240,7 +240,7 @@
 			</div>
 		</div>
 		<div
-			class="overflow-x-show relative flex h-[500px] -left-8 md:left-0 md:w-full w-[calc(100%+4rem)] items-start justify-center overflow-y-hidden ~px-4/20 pt-16"
+			class="relative flex h-[500px] -left-8 md:left-0 md:w-full w-[calc(100%+4rem)] items-start justify-center overflow-hidden ~px-4/20 pt-16"
 		>
 			<div class="relative aspect-[1/1.4142] w-full">
 				<div class="absolute inset-0 -rotate-6 transform-gpu">
