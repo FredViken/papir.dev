@@ -11,6 +11,6 @@
     }
 </script>
 
-<Button onclick={signOut}>
+<Button onclick={signOut} loadingText="Signing out...">
     Sign Out
 </Button>

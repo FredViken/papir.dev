@@ -2,11 +2,15 @@
 	import Button from '$ui/button/button.svelte';
 	import { PUBLIC_BASE_URL } from '$env/static/public';
 	import type { PageData } from './$types';
+	import Input from '$components/ui/input/input.svelte';
 
 	let { data }: { data: PageData } = $props();
 	let email = $state('');
+	let loading: null | 'github' | 'google' | 'email' = $state(null);
+
 
 	async function signInWithGithub() {
+		loading = 'github';
 		await data.supabase.auth.signInWithOAuth({
 			provider: 'github',
 			options: {
@@ -16,6 +20,7 @@
 	}
 
 	async function signInWithGoogle() {
+		loading = 'google';
 		await data.supabase.auth.signInWithOAuth({
 			provider: 'google'
 		});
@@ -23,7 +28,7 @@
 
 	async function signInWithEmail(e: Event) {
 		e.preventDefault();
-
+		loading = 'email';
 		const { error } = await data.supabase.auth.signInWithOtp({
 			email,
 			options: {
@@ -52,7 +57,7 @@
 			<form onsubmit={signInWithEmail} class="space-y-4">
 				<div>
 					<label for="email" class="text-sm font-medium">Email</label>
-					<input
+					<Input
 						type="email"
 						id="email"
 						bind:value={email}
@@ -61,7 +66,7 @@
 						class="mt-1.5 w-full rounded-md border bg-background px-3 py-2 text-sm"
 					/>
 				</div>
-				<Button type="submit" class="w-full">Continue with Email</Button>
+				<Button type="submit" loading={loading === 'email'} loadingText="Signing in with Email..." class="w-full">Continue with Email</Button>
 			</form>
 
 			<div class="relative">
@@ -74,11 +79,11 @@
 			</div>
 
 			<div class="grid gap-2">
-				<Button variant="outline" onclick={signInWithGithub} class="w-full">
+				<Button loading={loading === 'github'} loadingText="Signing in with GitHub..." variant="outline" onclick={signInWithGithub} class="w-full">
 					<i class="fa-brands fa-github text-brand"></i>
 					Continue with GitHub
 				</Button>
-				<Button variant="outline" onclick={signInWithGoogle} class="w-full">
+				<Button loading={loading === 'google'} loadingText="Signing in with Google..." variant="outline" onclick={signInWithGoogle} class="w-full">
 					<i class="fa-brands fa-google text-brand"></i>
 					Continue with Google
 				</Button>
