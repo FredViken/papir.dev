@@ -75,6 +75,7 @@ const authGuard: Handle = async ({ event, resolve }) => {
     redirect(303, '/app')
   }
 
+
   return resolve(event)
 }
 
