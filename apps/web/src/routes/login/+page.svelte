@@ -3,11 +3,12 @@
 	import { PUBLIC_BASE_URL } from '$env/static/public';
 	import type { PageData } from './$types';
 	import Input from '$components/ui/input/input.svelte';
+	import Icon from '$ui/icon/icon.svelte';
+	import { toast } from 'svelte-sonner';
 
 	let { data }: { data: PageData } = $props();
 	let email = $state('');
 	let loading: null | 'github' | 'google' | 'email' = $state(null);
-
 
 	async function signInWithGithub() {
 		loading = 'github';
@@ -43,11 +44,13 @@
 
 		email = '';
 		// Show success message or handle UI feedback
+		toast.success('Email sent');
+		loading = null;
 	}
 </script>
 
-<div class="container flex min-h-[calc(100vh-4rem)] items-center justify-center">
-	<div class="w-full max-w-sm space-y-8">
+<div class="flex min-h-screen items-center justify-center">
+	<div class="w-full max-w-md space-y-8">
 		<div class="text-center">
 			<h1 class="text-2xl font-bold">Welcome back</h1>
 			<p class="text-sm text-muted-foreground">Sign in to your account</p>
@@ -66,7 +69,14 @@
 						class="mt-1.5 w-full rounded-md border bg-background px-3 py-2 text-sm"
 					/>
 				</div>
-				<Button type="submit" loading={loading === 'email'} loadingText="Signing in with Email..." class="w-full">Continue with Email</Button>
+				<Button
+					type="submit"
+					loading={loading === 'email'}
+					loadingText="Signing in with Email..."
+					class="w-full"
+				>
+					Continue with Email
+				</Button>
 			</form>
 
 			<div class="relative">
@@ -79,12 +89,24 @@
 			</div>
 
 			<div class="grid gap-2">
-				<Button loading={loading === 'github'} loadingText="Signing in with GitHub..." variant="outline" onclick={signInWithGithub} class="w-full">
-					<i class="fa-brands fa-github text-brand"></i>
+				<Button
+					loading={loading === 'github'}
+					loadingText="Signing in with GitHub..."
+					variant="outline"
+					onclick={signInWithGithub}
+					class="w-full"
+				>
+					<Icon name="github" type="brands" class="mr-2 text-brand" />
 					Continue with GitHub
 				</Button>
-				<Button loading={loading === 'google'} loadingText="Signing in with Google..." variant="outline" onclick={signInWithGoogle} class="w-full">
-					<i class="fa-brands fa-google text-brand"></i>
+				<Button
+					loading={loading === 'google'}
+					loadingText="Signing in with Google..."
+					variant="outline"
+					onclick={signInWithGoogle}
+					class="w-full"
+				>
+					<Icon name="google" type="brands" class="mr-2 text-brand" />
 					Continue with Google
 				</Button>
 			</div>

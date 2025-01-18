@@ -2,6 +2,7 @@
     import { invalidate } from '$app/navigation'
     import { onMount } from 'svelte'
     import '../app.css';
+	import { Toaster } from '$components/ui/sonner';
   
     let { data, children } = $props()
     let { session, supabase } = $derived(data)
@@ -18,3 +19,5 @@
   </script>
   
   {@render children()}
+
+  <Toaster />
