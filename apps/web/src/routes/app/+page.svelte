@@ -7,98 +7,123 @@
 	import { superForm } from 'sveltekit-superforms';
 	import type { PageData } from './$types';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+	import Icon from '$ui/icon/icon.svelte';
 
-	let { data } = $props<{ data: PageData }>();
+	let { data }: { data: PageData } = $props();
+
 	let dialogOpen = $state(false);
 
 	const form = superForm(data.form, {
-		validators: zodClient(createWorkspaceSchema)
+		validators: zodClient(createWorkspaceSchema),
+		onResult: ({ result }) => {
+			// Close dialog on success
+			if (result.type === 'success') {
+				dialogOpen = false;
+			}
+		},
+
+		onError: ({ result }) => {
+			console.log(result);
+		}
 	});
 
-    const { form: formData, enhance, errors } = form;
+	const { form: formData, enhance, errors,delayed } = form;
 </script>
 
-<div class="container mx-auto py-8">
-	<div class="mb-8">
-		<h1 class="text-3xl font-bold">Select a Workspace</h1>
-		<p class="text-muted-foreground">Choose a workspace or create a new one to get started.</p>
-	</div>
+<svelte:head>
+	<title>Workspaces</title>
+</svelte:head>
 
+<div class="mx-auto max-w-lg px-6 py-16">
+	<h1 class="text-xl font-bold">Your workspaces</h1>
+	<p class="text-muted-foreground">
+		Choose a workspace or create a new one to get started with your PDF templates.
+	</p>
 	{#if data.workspaces?.length}
-		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-			{#each data.workspaces as workspace}
-				<a
-					href="/app/{workspace.slug}"
-					class="group relative rounded-lg border p-6 transition-all hover:shadow-md"
-				>
-					<h2 class="font-semibold group-hover:text-brand">{workspace.name}</h2>
-					{#if workspace.description}
-						<p class="mt-1 text-sm text-muted-foreground">{workspace.description}</p>
-					{/if}
-				</a>
-			{/each}
-		</div>
+	<ul class="mt-4 space-y-2">
+		{#each data.workspaces as workspace}
+			<li>
+				{@render item(workspace)}
+			</li>
+		{/each}
+		</ul>
 	{:else}
-		<div class="py-12 text-center">
-			<h3 class="text-lg font-medium">No workspaces yet</h3>
-			<p class="mt-1 text-muted-foreground">Create your first workspace to get started.</p>
+		<div class="mt-4 rounded-md border border-dashed bg-muted/40 p-4 py-8 text-center">
+			<Icon name="house" class="text-xl text-muted-foreground" />
+			<h2 class="mt-4 text-lg font-semibold">No workspaces yet</h2>
+			<p class="mt-2 text-sm text-muted-foreground text-balance">Create your first workspace to get started with your PDF templates.</p>
+		
 		</div>
 	{/if}
 
-	<Button onclick={() => (dialogOpen = true)} class="mt-8">Create Workspace</Button>
+	<Button onclick={() => (dialogOpen = true)} variant="outline" class="mt-8 w-full" size="lg">
+		<Icon name="plus" class="mr-2 size-4" />
+		Create Workspace
+	</Button>
+</div>
 
-	<Dialog.Root bind:open={dialogOpen}>
-		<Dialog.Content class="sm:max-w-[425px]">
-			<Dialog.Header>
-				<Dialog.Title>Create Workspace</Dialog.Title>
-				<Dialog.Description>
-					Create a new workspace to organize your templates and collaborate with others.
-				</Dialog.Description>
-			</Dialog.Header>
+{#snippet item(workspace: PageData['workspaces'][number])}
+	{@const role = workspace.workspace_members.find((member) => member.user_id === data.user?.id)?.role}
+	<a
+		href="/app/{workspace.id}"
+		class="group flex items-center gap-4 rounded-md border p-4 hover:bg-accent duration-200 shadow-sm"
+	>
+		<div
+			class="flex size-10 items-center justify-center border rounded-lg"
+			style="
+				background-color: {workspace.color.replace(')', ', 10%)')};
+				color: {workspace.color.replace('45%)', '35%)')};
+				border-color: {workspace.color.replace(')', ', 25%)')};
+			"
+		>
+			<Icon name="house" />
+		</div>
+		<div class="flex flex-col">
+			<h2 class="font-semibold">{workspace.name}</h2>
+			<p class="text-sm text-muted-foreground">
+				<Icon name={role == 'owner' ? 'crown' : 'users'} class="size-4" />
+				{role == 'owner' ? 'Owner' : 'Member'} • {workspace.workspace_members.length} member{workspace.workspace_members.length == 1 ? '' : 's'}
+			</p>
+		</div>
+	</a>
+{/snippet}
 
-			<form method="POST" use:enhance class="space-y-4">
+
+
+<Dialog.Root bind:open={dialogOpen}>
+	<Dialog.Content class="sm:max-w-[425px]">
+		<Dialog.Header>
+			<Dialog.Title>Create Workspace</Dialog.Title>
+			<!-- <Dialog.Description>
+				Create a new workspace to organize your templates and collaborate with others.
+			</Dialog.Description> -->
+		</Dialog.Header>
+
+		<form method="POST" use:enhance>
+			<div class="p-6">
 				<Form.Field {form} name="name">
 					<Form.Control>
 						{#snippet children({ props })}
 							<Form.Label>Name</Form.Label>
-							<Input {...props} placeholder="Acme Inc." />
+							<Input {...props} bind:value={$formData.name} placeholder="Acme Inc." />
 						{/snippet}
 					</Form.Control>
 					<Form.Description>This is your workspace's visible name.</Form.Description>
 					<Form.FieldErrors />
 				</Form.Field>
 
-				<Form.Field {form} name="slug">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label>Slug</Form.Label>
-							<Input {...props} placeholder="acme" />
-						{/snippet}
-					</Form.Control>
-					<Form.Description>
-						This will be used in URLs. Use lowercase letters, numbers, and hyphens only.
-					</Form.Description>
-					<Form.FieldErrors />
-				</Form.Field>
+				{#if $errors}
+					<div class="mt-4">
+						<p class="text-sm text-red-500">{$errors.name}</p>
+					</div>
+				{/if}
+			</div>
 
-				<Form.Field {form} name="description">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label>Description</Form.Label>
-							<Input {...props} placeholder="A brief description of your workspace" />
-						{/snippet}
-					</Form.Control>
-					<Form.Description>Optional description for your workspace.</Form.Description>
-					<Form.FieldErrors />
-				</Form.Field>
-
-				<Dialog.Footer>
-					<Button type="button" variant="outline" onclick={() => (dialogOpen = false)}>
-						Cancel
-					</Button>
-					<Button type="submit">Create</Button>
-				</Dialog.Footer>
-			</form>
-		</Dialog.Content>
-	</Dialog.Root>
-</div>
+			<Dialog.Footer>
+				<Button type="button" variant="outline" onclick={() => (dialogOpen = false)}>Cancel</Button>
+				<Button type="submit" loading={$delayed} loadingText="Creating...">Create</Button>
+			</Dialog.Footer>
+		</form>
+	</Dialog.Content>
+</Dialog.Root>
+<!-- </div> -->

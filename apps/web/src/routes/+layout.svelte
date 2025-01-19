@@ -2,7 +2,9 @@
     import { invalidate } from '$app/navigation'
     import { onMount } from 'svelte'
     import '../app.css';
+    import { ProgressBar } from "@prgm/sveltekit-progress-bar";
 	import { Toaster } from '$components/ui/sonner';
+	// import NavigationProgress from '$components/ui/progress/navigation-progress.svelte';
   
     let { data, children } = $props()
     let { session, supabase } = $derived(data)
@@ -16,8 +18,9 @@
   
       return () => data.subscription.unsubscribe()
     })
-  </script>
-  
-  {@render children()}
+</script>
 
-  <Toaster />
+<!-- <NavigationProgress /> -->
+<ProgressBar class="text-rose-500" />
+{@render children()}
+<Toaster />

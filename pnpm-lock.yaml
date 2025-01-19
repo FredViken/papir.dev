@@ -56,6 +56,9 @@ importers:
       mini-svg-data-uri:
         specifier: ^1.4.4
         version: 1.4.4
+      nanoid:
+        specifier: ^5.0.9
+        version: 5.0.9
     devDependencies:
       '@eslint/js':
         specifier: ^9.17.0
@@ -63,6 +66,9 @@ importers:
       '@playwright/test':
         specifier: ^1.45.3
         version: 1.49.1
+      '@prgm/sveltekit-progress-bar':
+        specifier: ^3.0.1
+        version: 3.0.1(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11(@types/node@22.10.5)))(svelte@5.17.3)(vite@5.4.11(@types/node@22.10.5)))(svelte@5.17.3)
       '@sveltejs/adapter-cloudflare':
         specifier: ^4.8.0
         version: 4.9.0(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11(@types/node@22.10.5)))(svelte@5.17.3)(vite@5.4.11(@types/node@22.10.5)))(wrangler@3.101.0(@cloudflare/workers-types@4.20250109.0))
@@ -980,6 +986,13 @@ packages:
   '@poppinss/macroable@1.0.4':
     resolution: {integrity: sha512-ct43jurbe7lsUX5eIrj4ijO3j/6zIPp7CDnFWXDs7UPAbw1Pu1iH3oAmFdP4jcskKJBURH5M9oTtyeiUXyHX8Q==}
     engines: {node: '>=18.16.0'}
+
+  '@prgm/sveltekit-progress-bar@3.0.1':
+    resolution: {integrity: sha512-ztVsKJPIs5DJPrEGA/+6fSGfmzN4XF4cID6x1FxcZAt1J39CwTYz4ipK68fqOUcBE9x2Kwxpjnmr3oOI1C5vkA==}
+    engines: {node: ^20.5.0 || >=22.2.0}
+    peerDependencies:
+      '@sveltejs/kit': ^2.0.0
+      svelte: ^5.0.0
 
   '@rollup/rollup-android-arm-eabi@4.30.1':
     resolution: {integrity: sha512-pSWY+EVt3rJ9fQ3IqlrEUtXh3cGqGtPDH1FQlNZehO2yYxCHEX1SPsz1M//NXwYfbTlcKr9WObLnJX9FsS9K1Q==}
@@ -2298,6 +2311,11 @@ packages:
   nanoid@3.3.8:
     resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
+  nanoid@5.0.9:
+    resolution: {integrity: sha512-Aooyr6MXU6HpvvWXKoVoXwKMs/KyVakWwg7xQfv5/S/RIgJMy0Ifa45H9qqYy7pTCszrHzP21Uk4PZq2HpEM8Q==}
+    engines: {node: ^18 || >=20}
     hasBin: true
 
   natural-compare@1.4.0:
@@ -4118,6 +4136,11 @@ snapshots:
   '@poppinss/macroable@1.0.4':
     optional: true
 
+  '@prgm/sveltekit-progress-bar@3.0.1(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11(@types/node@22.10.5)))(svelte@5.17.3)(vite@5.4.11(@types/node@22.10.5)))(svelte@5.17.3)':
+    dependencies:
+      '@sveltejs/kit': 2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11(@types/node@22.10.5)))(svelte@5.17.3)(vite@5.4.11(@types/node@22.10.5))
+      svelte: 5.17.3
+
   '@rollup/rollup-android-arm-eabi@4.30.1':
     optional: true
 
@@ -5701,6 +5724,8 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.8: {}
+
+  nanoid@5.0.9: {}
 
   natural-compare@1.4.0: {}
 
