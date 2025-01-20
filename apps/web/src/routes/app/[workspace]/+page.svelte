@@ -10,4 +10,5 @@
 		Back
 	</a>
 	<h1>{data.workspace.name}</h1>
+	<button onclick={() => data.supabase.auth.signOut()}>sign out</button>
 </div>

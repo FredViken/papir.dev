@@ -73,10 +73,10 @@
 			style="
 				background-color: {workspace.color.replace(')', ', 10%)')};
 				color: {workspace.color.replace('45%)', '35%)')};
-				border-color: {workspace.color.replace(')', ', 25%)')};
+				border-color: {workspace.color.replace(')', ', 100%)')};
 			"
 		>
-			<Icon name="house" />
+			<Icon name="house" type="solid" />
 		</div>
 		<div class="flex flex-col">
 			<h2 class="font-semibold">{workspace.name}</h2>

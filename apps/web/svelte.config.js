@@ -15,7 +15,8 @@ const config = {
 		alias: {
 			$components: "./src/lib/components/*",
 			$ui: "./src/lib/components/ui/*",
-			$db: "../../supabase/db.d.ts"
+			$db: "../../supabase/db.d.ts",
+			$hooks: "./src/lib/hooks/*"
 		}
 	}
 };

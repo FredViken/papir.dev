@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import { scrollY } from 'svelte/reactivity/window';
-	import '../app.css';
+	// import '../../app.css';
 	let { children } = $props();
 
 	let isScrolled = $derived(scrollY.current ? scrollY.current > 100 : false);
@@ -15,7 +15,7 @@
 	<div class="container flex h-16 items-center justify-between">
 		<div class="flex items-center gap-2">
 			{@render logo()}
-			<span class="text-xl font-bold text-brand">Prismer.io</span>
+			<span class="text-xl font-bold text-brand">Papir.dev</span>
 		</div>
 		<div class="hidden items-center gap-6 text-muted-foreground sm:flex">
 			<a href="/">Home</a>
@@ -32,7 +32,7 @@
 {@render children()}
 
 {#snippet logo()}
-	<img src="/logo.svg" alt="Prismer" class="size-8" />
+	<img src="/logo.svg" alt="Prismer" class="size-8 rounded-sm" />
 	<!-- <div class="grid">
 		<div class="relative size-6 rotate-45 rounded-sm drop-shadow-md col-start-1 row-start-1">
 			<div class="bg-gradient-to-b from-brand/50 to-brand/10 absolute inset-0 h-full w-3/4 rounded-[2px]"></div>
