@@ -56,6 +56,91 @@ export type Database = {
         }
         Relationships: []
       }
+      template_versions: {
+        Row: {
+          content: string
+          created_at: string
+          created_by: string | null
+          schema: Json
+          template_slug: string
+          version: number
+          workspace_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          created_by?: string | null
+          schema: Json
+          template_slug: string
+          version: number
+          workspace_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          schema?: Json
+          template_slug?: string
+          version?: number
+          workspace_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "template_versions_workspace_id_template_slug_fkey"
+            columns: ["workspace_id", "template_slug"]
+            isOneToOne: false
+            referencedRelation: "templates"
+            referencedColumns: ["workspace_id", "slug"]
+          },
+        ]
+      }
+      templates: {
+        Row: {
+          content: string
+          created_at: string
+          description: string | null
+          is_published: boolean
+          name: string
+          schema: Json
+          slug: string
+          updated_at: string
+          version: number
+          workspace_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          description?: string | null
+          is_published?: boolean
+          name: string
+          schema?: Json
+          slug: string
+          updated_at?: string
+          version?: number
+          workspace_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          description?: string | null
+          is_published?: boolean
+          name?: string
+          schema?: Json
+          slug?: string
+          updated_at?: string
+          version?: number
+          workspace_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "templates_workspace_id_fkey"
+            columns: ["workspace_id"]
+            isOneToOne: false
+            referencedRelation: "workspaces"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       workspace_members: {
         Row: {
           created_at: string

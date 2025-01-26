@@ -47,6 +47,10 @@
 	);
 </script>
 
+<svelte:head>
+  <title>{data.workspace.name} | Prismer.io</title>
+</svelte:head>
+
 <Sidebar.Provider>
 	<Sidebar.Root collapsible="icon">
 

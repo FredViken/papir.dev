@@ -21,6 +21,6 @@
 </script>
 
 <!-- <NavigationProgress /> -->
-<ProgressBar class="text-rose-500" />
+<!-- <ProgressBar class="text-rose-500 z-50" /> -->
 {@render children()}
 <Toaster />
