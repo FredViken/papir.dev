@@ -1,33 +1,26 @@
-<script lang="ts">
-	import { Button } from '$lib/components/ui/button';
-	import { scrollY } from 'svelte/reactivity/window';
-	import '../app.css';
-	let { children } = $props();
-
-	let isScrolled = $derived(scrollY.current ? scrollY.current > 100 : false);
+<script>
+    import { invalidate } from '$app/navigation'
+    import { onMount } from 'svelte'
+    import '../app.css';
+    import { ProgressBar } from "@prgm/sveltekit-progress-bar";
+	import { Toaster } from '$components/ui/sonner';
+	// import NavigationProgress from '$components/ui/progress/navigation-progress.svelte';
+  
+    let { data, children } = $props()
+    let { session, supabase } = $derived(data)
+  
+    onMount(() => {
+      const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
+        if (newSession?.expires_at !== session?.expires_at) {
+          invalidate('supabase:auth')
+        }
+      })
+  
+      return () => data.subscription.unsubscribe()
+    })
 </script>
 
-<nav class="fixed left-0 right-0 top-0 z-50 w-full duration-300 {isScrolled ? 'bg-background/75 backdrop-blur-sm' : ''}">
-	<div class="container flex h-16 items-center justify-between">
-		<div class="flex items-center gap-2">
-			<div
-				class="flex size-8 items-center justify-center rounded-sm bg-rose-500 font-bold text-white shadow-inner shadow-white/20"
-			>
-				P
-			</div>
-			<span class="text-xl font-bold">Papir.dev</span>
-		</div>
-		<div class="items-center gap-6 text-muted-foreground hidden sm:flex">
-
-			<a href="/">Home</a>
-			<a href="/pricing">Pricing</a>
-			<a href="/docs">Docs</a>
-			<a href="/blog">Blog</a>
-		</div>
-		<div class="flex items-center gap-4">
-			<Button variant="outline">Login</Button>
-			<Button>Get started</Button>
-		</div>
-	</div>
-</nav>
+<!-- <NavigationProgress /> -->
+<!-- <ProgressBar class="text-rose-500 z-50" /> -->
 {@render children()}
+<Toaster />

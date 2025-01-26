@@ -225,16 +225,16 @@
 	});
 </script>
 
-<div class="relative pt-16 bg-grid-neutral-100">
-	<section class="container  grid overflow-hidden md:grid-cols-[2fr_3fr] lg:gap-12">
+<div class="relative pt-16 bg-grid-neutral-100 dark:bg-grid-neutral-900">
+	<section class="container grid overflow-hidden md:grid-cols-[2fr_3fr] lg:gap-12">
 		<div
 			class="my-auto flex flex-col items-center justify-center space-y-4 pt-20 md:pt-32 text-center md:items-start md:py-20 md:text-left"
 		>
-			<h1 class="text-4xl font-bold">Simplify your <span class="text-rose-500">PDFs</span></h1>
+			<h1 class="text-4xl font-bold">Simplify your <span class="">PDFs</span></h1>
 			<p class="text-pretty text-lg text-muted-foreground">
 				Create beautiful dynamic and fully customizable PDFs with our powerful editor and API.
 			</p>
-			<div class="flex gap-4">
+			<div class="flex gap-4 z-10">
 				<Button href="/signup" class="w-fit">Get started for free</Button>
 				<Button variant="outline" class="w-fit">Pricing</Button>
 			</div>
@@ -244,24 +244,24 @@
 		>
 			<div class="relative aspect-[1/1.4142] w-full">
 				<div class="absolute inset-0 -rotate-6 transform-gpu">
-					<div class="h-full w-full rounded-sm border bg-white p-8 shadow-xl shadow-rose-500">
+					<div class="h-full w-full rounded-sm border bg-muted p-8 shadow-xl shadow-brand">
 						<div class="mb-2 h-4 w-full rounded bg-muted"></div>
 						<div class="mb-2 h-4 w-3/4 rounded bg-muted"></div>
 						<div class="h-4 w-1/2 rounded bg-muted"></div>
 					</div>
 				</div>
 				<div class="absolute inset-0 rotate-3 transform-gpu">
-					<div class="h-full w-full rounded-sm border bg-white p-8 shadow-lg shadow-rose-500">
+					<div class="h-full w-full rounded-sm border bg-muted p-8 shadow-lg shadow-brand">
 						<div class="mb-2 h-4 w-full rounded bg-muted"></div>
 						<div class="mb-2 h-4 w-2/3 rounded bg-muted"></div>
 						<div class="h-4 w-1/3 rounded bg-muted"></div>
 					</div>
 				</div>
-				<div class="absolute inset-0 transform-gpu" bind:this={invoiceRef}>
-					<div class="h-full w-full rounded-sm border bg-white p-8 shadow-lg shadow-rose-500">
+				<div class="absolute inset-0 transform-gpu " bind:this={invoiceRef}>
+					<div class="h-full w-full rounded-sm paper-corner border bg-muted p-8 shadow-lg">
 						<div class="mb-6 flex items-start justify-between">
 							<div class="flex items-center gap-2">
-								<div class="flex size-8 items-center justify-center rounded bg-rose-500">
+								<div class="flex size-8 items-center justify-center rounded bg-brand">
 									<span class="text-sm font-bold text-white">A</span>
 								</div>
 								<div>
@@ -283,7 +283,7 @@
 						</div>
 
 						<div class="invoice-details mb-6">
-							<h2 class="invoice-name text-xl font-semibold text-rose-500">{invoiceName}</h2>
+							<h2 class="invoice-name text-xl font-semibold text-brand">{invoiceName}</h2>
 							<div class="mt-1">
 								<p class="text-xs text-muted-foreground">Issue Date: {invoiceDate}</p>
 								<p class="text-xs text-muted-foreground">Due Date: {dueDate}</p>
@@ -356,3 +356,21 @@
 </section> -->
 
 <div class="h-[1000px]"></div>
+
+<footer class="p-2">
+	<div class="flex justify-between rounded-md bg-neutral-900 shadow-inner shadow-white/20 h-96 text-neutral-50 overflow-hidden">
+		<div class="flex gap-2 bg-grid-neutral-800 size-full p-8">
+			<div class="flex size-8 items-center justify-center rounded-sm bg-brand font-bold text-white shadow-inner shadow-white/20">
+				P
+			</div>
+			<span class="text-xl font-bold">Papir.dev</span>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* .paper-corner{
+		
+		border-image: conic-gradient(blue, cyan, indigo, aqua, blue, cyan, blue) 1;
+	} */
+</style>
