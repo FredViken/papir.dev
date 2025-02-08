@@ -22,18 +22,18 @@
 
 	const form = superForm(formProps, {
 		validators: zodClient(createTemplateSchema),
-    onResult: ({result}) => {
-      if (result.type === 'success') {
-        console.log(result);
-        open = false;
-        toast.success('Template created');
-        if (result.data) {
-          goto(`/app/${page.params.workspace}/templates/${result.data.form.data.slug}`);
-        } else {
-          invalidateAll();
-        }
-      }
-    }
+		onResult: ({ result }) => {
+			if (result.type === 'success') {
+				console.log(result);
+				open = false;
+				toast.success('Template created');
+				if (result.data) {
+					goto(`/app/${page.params.workspace}/templates/${result.data.form.data.slug}`);
+				} else {
+					invalidateAll();
+				}
+			}
+		}
 	});
 
 	const { form: formData, enhance, errors, delayed, submitting } = form;
@@ -75,13 +75,14 @@
 					>
 					<Form.FieldErrors />
 				</Form.Field>
-      </div>
+			</div>
 
-				<Dialog.Footer>
-					<Dialog.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Dialog.Close>
-					<Button type="submit" loading={$delayed || $submitting} loadingText="Creating...">Create template</Button
-					>
-				</Dialog.Footer>
+			<Dialog.Footer>
+				<Dialog.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Dialog.Close>
+				<Button type="submit" loading={$delayed || $submitting} loadingText="Creating..."
+					>Create template</Button
+				>
+			</Dialog.Footer>
 		</form>
 	</Dialog.Content>
 </Dialog.Root>

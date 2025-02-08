@@ -13,10 +13,10 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		alias: {
-			$components: "./src/lib/components/*",
-			$ui: "./src/lib/components/ui/*",
-			$db: "../../supabase/db.d.ts",
-			$hooks: "./src/lib/hooks/*"
+			$components: './src/lib/components/*',
+			$ui: './src/lib/components/ui/*',
+			$db: '../../supabase/db.d.ts',
+			$hooks: './src/lib/hooks/*'
 		}
 	}
 };

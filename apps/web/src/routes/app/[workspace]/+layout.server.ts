@@ -34,4 +34,4 @@ export const load: LayoutServerLoad = async ({ params, locals: { supabase, user 
 		workspace,
 		workspaces: workspaces || []
 	};
-}; 
+};

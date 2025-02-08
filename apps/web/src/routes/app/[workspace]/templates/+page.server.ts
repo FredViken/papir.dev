@@ -6,8 +6,7 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import { zod } from 'sveltekit-superforms/adapters';
 
 export const load: PageServerLoad = async ({ locals: { supabase }, params, depends }) => {
-
-  depends('supabase:db:templates');
+	depends('supabase:db:templates');
 	type Template = Tables<'templates'>;
 
 	const [{ data: templates }, form] = await Promise.all([
