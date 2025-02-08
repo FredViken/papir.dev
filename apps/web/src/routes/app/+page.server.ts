@@ -48,7 +48,6 @@ export const actions: Actions = {
 			.select('id')
 			.single();
 
-
 		if (workspaceError) {
 			console.error(workspaceError);
 			return message(form, 'Failed to create workspace. Please try again.', { status: 500 });

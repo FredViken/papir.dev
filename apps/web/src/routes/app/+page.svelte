@@ -27,7 +27,7 @@
 		}
 	});
 
-	const { form: formData, enhance, errors,delayed } = form;
+	const { form: formData, enhance, errors, delayed } = form;
 </script>
 
 <svelte:head>
@@ -40,19 +40,20 @@
 		Choose a workspace or create a new one to get started with your PDF templates.
 	</p>
 	{#if data.workspaces?.length}
-	<ul class="mt-4 space-y-2">
-		{#each data.workspaces as workspace}
-			<li>
-				{@render item(workspace)}
-			</li>
-		{/each}
+		<ul class="mt-4 space-y-2">
+			{#each data.workspaces as workspace}
+				<li>
+					{@render item(workspace)}
+				</li>
+			{/each}
 		</ul>
 	{:else}
 		<div class="mt-4 rounded-md border border-dashed bg-muted/40 p-4 py-8 text-center">
 			<Icon name="house" class="text-xl text-muted-foreground" />
 			<h2 class="mt-4 text-lg font-semibold">No workspaces yet</h2>
-			<p class="mt-2 text-sm text-muted-foreground text-balance">Create your first workspace to get started with your PDF templates.</p>
-		
+			<p class="mt-2 text-balance text-sm text-muted-foreground">
+				Create your first workspace to get started with your PDF templates.
+			</p>
 		</div>
 	{/if}
 
@@ -63,13 +64,15 @@
 </div>
 
 {#snippet item(workspace: PageData['workspaces'][number])}
-	{@const role = workspace.workspace_members.find((member) => member.user_id === data.user?.id)?.role}
+	{@const role = workspace.workspace_members.find(
+		(member) => member.user_id === data.user?.id
+	)?.role}
 	<a
 		href="/app/{workspace.id}"
-		class="group flex items-center gap-4 rounded-md border p-4 hover:bg-accent duration-200 shadow-sm"
+		class="group flex items-center gap-4 rounded-md border p-4 shadow-sm duration-200 hover:bg-accent"
 	>
 		<div
-			class="flex size-10 items-center justify-center border rounded-lg"
+			class="flex size-10 items-center justify-center rounded-lg border"
 			style="
 				background-color: {workspace.color.replace(')', ', 10%)')};
 				color: {workspace.color.replace('45%)', '35%)')};
@@ -82,13 +85,14 @@
 			<h2 class="font-semibold">{workspace.name}</h2>
 			<p class="text-sm text-muted-foreground">
 				<Icon name={role == 'owner' ? 'crown' : 'users'} class="size-4" />
-				{role == 'owner' ? 'Owner' : 'Member'} • {workspace.workspace_members.length} member{workspace.workspace_members.length == 1 ? '' : 's'}
+				{role == 'owner' ? 'Owner' : 'Member'} • {workspace.workspace_members.length} member{workspace
+					.workspace_members.length == 1
+					? ''
+					: 's'}
 			</p>
 		</div>
 	</a>
 {/snippet}
-
-
 
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Content class="sm:max-w-[425px]">

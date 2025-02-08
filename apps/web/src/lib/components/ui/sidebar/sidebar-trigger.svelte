@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button/index.js";
-	import { cn } from "$lib/utils.js";
-	import PanelLeft from "lucide-svelte/icons/panel-left";
-	import type { ComponentProps } from "svelte";
-	import { useSidebar } from "./context.svelte.js";
-	import Icon from "../icon/icon.svelte";
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { cn } from '$lib/utils.js';
+	import PanelLeft from 'lucide-svelte/icons/panel-left';
+	import type { ComponentProps } from 'svelte';
+	import { useSidebar } from './context.svelte.js';
+	import Icon from '../icon/icon.svelte';
 
 	let {
 		ref = $bindable(null),
@@ -27,7 +27,7 @@
 	data-sidebar="trigger"
 	variant="ghost"
 	size="icon"
-	class={cn("h-7 w-7", className)}
+	class={cn('h-7 w-7', className)}
 	{...restProps}
 >
 	<Icon name="bars" />

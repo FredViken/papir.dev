@@ -228,19 +228,19 @@
 <div class="relative pt-16 bg-grid-neutral-100 dark:bg-grid-neutral-900">
 	<section class="container grid overflow-hidden md:grid-cols-[2fr_3fr] lg:gap-12">
 		<div
-			class="my-auto flex flex-col items-center justify-center space-y-4 pt-20 md:pt-32 text-center md:items-start md:py-20 md:text-left"
+			class="my-auto flex flex-col items-center justify-center space-y-4 pt-20 text-center md:items-start md:py-20 md:pt-32 md:text-left"
 		>
 			<h1 class="text-4xl font-bold">Simplify your <span class="">PDFs</span></h1>
 			<p class="text-pretty text-lg text-muted-foreground">
 				Create beautiful dynamic and fully customizable PDFs with our powerful editor and API.
 			</p>
-			<div class="flex gap-4 z-10">
+			<div class="z-10 flex gap-4">
 				<Button href="/signup" class="w-fit">Get started for free</Button>
 				<Button variant="outline" class="w-fit">Pricing</Button>
 			</div>
 		</div>
 		<div
-			class="relative flex h-[500px] -left-8 md:left-0 md:w-full w-[calc(100%+4rem)] items-start justify-center overflow-hidden ~px-4/20 pt-16"
+			class="relative -left-8 flex h-[500px] w-[calc(100%+4rem)] items-start justify-center overflow-hidden pt-16 ~px-4/20 md:left-0 md:w-full"
 		>
 			<div class="relative aspect-[1/1.4142] w-full">
 				<div class="absolute inset-0 -rotate-6 transform-gpu">
@@ -257,8 +257,8 @@
 						<div class="h-4 w-1/3 rounded bg-muted"></div>
 					</div>
 				</div>
-				<div class="absolute inset-0 transform-gpu " bind:this={invoiceRef}>
-					<div class="h-full w-full rounded-sm paper-corner border bg-muted p-8 shadow-lg">
+				<div class="absolute inset-0 transform-gpu" bind:this={invoiceRef}>
+					<div class="paper-corner h-full w-full rounded-sm border bg-muted p-8 shadow-lg">
 						<div class="mb-6 flex items-start justify-between">
 							<div class="flex items-center gap-2">
 								<div class="flex size-8 items-center justify-center rounded bg-brand">
@@ -313,7 +313,7 @@
 				</div>
 			</div>
 			<div
-				class="absolute bottom-4 md:bottom-20 left-1/2 -translate-x-1/2 md:translate-x-0 md:right-4 z-20 w-80 transform-gpu rounded-lg border-2 border-neutral-700 bg-neutral-900/75 p-4 font-mono text-sm text-neutral-200 shadow-lg backdrop-blur-sm"
+				class="absolute bottom-4 left-1/2 z-20 w-80 -translate-x-1/2 transform-gpu rounded-lg border-2 border-neutral-700 bg-neutral-900/75 p-4 font-mono text-sm text-neutral-200 shadow-lg backdrop-blur-sm md:bottom-20 md:right-4 md:translate-x-0"
 				bind:this={terminalRef}
 			>
 				<div class="mb-3 flex items-center gap-1.5">
@@ -321,7 +321,7 @@
 					<div class="size-2 rounded-full bg-yellow-500"></div>
 					<div class="size-2 rounded-full bg-green-500"></div>
 				</div>
-				<code class="relative space-y-1 text-xs prose" lang="json">
+				<code class="prose relative space-y-1 text-xs" lang="json">
 					<span>&#123;</span>
 					<div class="ml-4 space-y-1">
 						<p class="rounded-sm p-1">"name": "{invoiceName}",</p>
@@ -358,9 +358,13 @@
 <div class="h-[1000px]"></div>
 
 <footer class="p-2">
-	<div class="flex justify-between rounded-md bg-neutral-900 shadow-inner shadow-white/20 h-96 text-neutral-50 overflow-hidden">
-		<div class="flex gap-2 bg-grid-neutral-800 size-full p-8">
-			<div class="flex size-8 items-center justify-center rounded-sm bg-brand font-bold text-white shadow-inner shadow-white/20">
+	<div
+		class="flex h-96 justify-between overflow-hidden rounded-md bg-neutral-900 text-neutral-50 shadow-inner shadow-white/20"
+	>
+		<div class="flex size-full gap-2 p-8 bg-grid-neutral-800">
+			<div
+				class="flex size-8 items-center justify-center rounded-sm bg-brand font-bold text-white shadow-inner shadow-white/20"
+			>
 				P
 			</div>
 			<span class="text-xl font-bold">Papir.dev</span>
